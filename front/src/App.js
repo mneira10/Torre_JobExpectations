@@ -1,25 +1,53 @@
+import React, { useState } from "react";
 import SearchJob from "./SearchJob/SearchJob";
 import {
   MuiThemeProvider,
   createMuiTheme,
   CssBaseline,
+  Box,
 } from "@material-ui/core";
 import "./App.css";
 const themeDark = createMuiTheme({
   palette: {
     background: {
-      default: "#222222",
+      default: "#252525",
+      paper: "#424242",
     },
     text: {
       primary: "#ffffff",
+      secondary: "#aaaaaa",
+    },
+    primary: {
+      main: "#00e9b1",
+    },
+    secondary: {
+      main: "#b593ff",
     },
   },
 });
 function App() {
+  const [location, setLocation] = useState(null);
+  const [role, setRole] = useState(null);
+  const [salaryRange, setSalaryRange] = useState(null);
+
+  function renderContent() {
+    if (location === null && role === null && salaryRange === null) {
+      return (
+        <SearchJob stateSetters={{ setLocation, setRole, setSalaryRange }} />
+      );
+    }
+
+    return (
+      <h1>
+        we have parameters!! {location}, {role}, {salaryRange}
+      </h1>
+    );
+  }
+
   return (
     <MuiThemeProvider theme={themeDark}>
       <CssBaseline />
-      <SearchJob />
+      <Box m={5}>{renderContent()}</Box>
     </MuiThemeProvider>
   );
 }
