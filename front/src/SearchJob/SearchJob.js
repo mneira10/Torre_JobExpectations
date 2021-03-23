@@ -6,9 +6,9 @@ import {
   Button,
 } from "@material-ui/core";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
-import SalaryInputCard from "./InputCards/SalaryInput";
+import SalaryInputCard from "../InputCards/SalaryInput";
 import WorkIcon from "@material-ui/icons/Work";
-import TextFieldInputCard from "./InputCards/TextFieldInputCard";
+import TextFieldInputCard from "../InputCards/TextFieldInputCard";
 
 const useStyles = makeStyles((theme) => ({
   textFieldCard: {

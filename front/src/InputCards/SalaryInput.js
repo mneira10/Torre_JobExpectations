@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import Slider from "@material-ui/core/Slider";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
-import { maxSalaryInYears } from "../../Constants";
+import { maxSalaryInYears } from "../Constants";
 export default function SalaryInputCard(props) {
   const salaryPeriods = {
     YEARLY: { text: "yearly", normFactor: 1.0, key: "YEARLY" },
