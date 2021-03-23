@@ -7,15 +7,15 @@ import {
   TextField,
   Grid,
 } from "@material-ui/core";
+import { inputCardStyles } from "./InputCardConstants";
 
 export default function TextFieldInputCard(props) {
+  const classes = inputCardStyles();
   return (
-    <Card className={props.classes.textFieldCard}>
+    <Card className={classes.inputFieldCard}>
       <CardContent>
         <Grid container direction="row" alignItems="center" spacing={1}>
-          <Grid item>
-            {props.children}
-          </Grid>
+          <Grid item>{props.children}</Grid>
           <Grid item>
             <Typography variant="h5">{props.cardName}</Typography>
           </Grid>

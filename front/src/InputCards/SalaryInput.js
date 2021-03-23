@@ -11,12 +11,16 @@ import {
 import Slider from "@material-ui/core/Slider";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import { maxSalaryInYears } from "../Constants";
+import { inputCardStyles } from "./InputCardConstants";
+
 export default function SalaryInputCard(props) {
   const salaryPeriods = {
     YEARLY: { text: "yearly", normFactor: 1.0, key: "YEARLY" },
     MONTHLY: { text: "monthly", normFactor: 1 / 12, key: "MONTHLY" },
     HOURLY: { text: "hourly", normFactor: 1 / (52 * 40), key: "HOURLY" },
   };
+
+  const classes = inputCardStyles();
 
   // state handlers
   function handleSalaryPeriod(newSalaryPeriod) {
@@ -86,7 +90,7 @@ export default function SalaryInputCard(props) {
     );
   }
   return (
-    <Card className={props.classes.textFieldCard}>
+    <Card className={classes.inputFieldCard}>
       <CardContent>
         <Grid container direction="row" alignItems="center" spacing={1}>
           <Grid item>

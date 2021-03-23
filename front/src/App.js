@@ -3,6 +3,7 @@ import SearchJobSkills from "./SearchJobSkills/SearchJobSkills";
 import { MuiThemeProvider, CssBaseline, Box } from "@material-ui/core";
 import { themeDark } from "./Theme";
 import { maxSalaryInYears } from "./Constants";
+import SkillResults from "./SearchJobSkills/SkillResults";
 
 function App() {
   const [location, setLocation] = useState("");
@@ -12,31 +13,26 @@ function App() {
     periodicity: "YEARLY",
   });
   const [userSearched, setUserSearched] = useState(false);
-
-  function searchJobs() {
-    console.log(location, role, salaryRange);
-
-    setUserSearched(true);
-  }
+  const searchParamState = {
+    setLocation,
+    location,
+    setRole,
+    role,
+    setSalaryRange,
+    salaryRange,
+  };
 
   function renderContent() {
     if (!userSearched) {
       return (
         <SearchJobSkills
-          searchParamState={{
-            setLocation,
-            location,
-            setRole,
-            role,
-            setSalaryRange,
-            salaryRange,
-          }}
-          searchJobs={searchJobs}
+          searchParamState={searchParamState}
+          searchJobs={() => setUserSearched(true)}
         />
       );
     }
 
-    return <h1>we have parameters!!</h1>;
+    return <SkillResults searchParamState={searchParamState} />;
   }
 
   return (

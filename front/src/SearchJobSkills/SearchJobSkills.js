@@ -2,7 +2,6 @@ import React from "react";
 import {
   Typography,
   Box,
-  makeStyles,
   Button,
 } from "@material-ui/core";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
@@ -10,16 +9,9 @@ import SalaryInputCard from "../InputCards/SalaryInput";
 import WorkIcon from "@material-ui/icons/Work";
 import TextFieldInputCard from "../InputCards/TextFieldInputCard";
 
-const useStyles = makeStyles((theme) => ({
-  textFieldCard: {
-    maxWidth: 400,
-    minWidth: 360,
-    margin: 10,
-  },
-}));
+
 
 export default function SearchJobSkills(props) {
-  const classes = useStyles();
 
   return (
     <Box
@@ -44,7 +36,6 @@ export default function SearchJobSkills(props) {
       >
         <Box display="flex" flexDirection="column" justifyContent="center">
           <TextFieldInputCard
-            classes={classes}
             cardName={"Location"}
             placeholder={"eg. Remote, Bogota"}
             value={props.searchParamState.location}
@@ -54,7 +45,6 @@ export default function SearchJobSkills(props) {
           </TextFieldInputCard>
 
           <TextFieldInputCard
-            classes={classes}
             cardName={"Role"}
             placeholder={"eg. Software developer"}
             value={props.searchParamState.role}
@@ -65,7 +55,6 @@ export default function SearchJobSkills(props) {
         </Box>
 
         <SalaryInputCard
-          classes={classes}
           searchParamState={props.searchParamState}
         />
       </Box>
