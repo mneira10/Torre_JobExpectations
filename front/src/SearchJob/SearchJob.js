@@ -6,8 +6,11 @@ import {
   CardContent,
   makeStyles,
   TextField,
+  Grid,
 } from "@material-ui/core";
+import LocationOnIcon from "@material-ui/icons/LocationOn";
 import SalaryInput from "./InputCards/SalaryInput";
+import WorkIcon from '@material-ui/icons/Work';
 
 const useStyles = makeStyles((theme) => ({
   textFieldCard: {
@@ -35,7 +38,14 @@ export default function SearchJob(props) {
         <Box display="flex" flexDirection="column" justifyContent="center">
           <Card className={classes.textFieldCard}>
             <CardContent>
-              <Typography variant="h6">Location</Typography>
+              <Grid container direction="row" alignItems="center" spacing={1}>
+                <Grid item>
+                  <LocationOnIcon />
+                </Grid>
+                <Grid item>
+                  <Typography variant="h5">Location</Typography>
+                </Grid>
+              </Grid>
               <TextField
                 variant="filled"
                 fullWidth={true}
@@ -46,7 +56,14 @@ export default function SearchJob(props) {
 
           <Card className={classes.textFieldCard}>
             <CardContent>
-              <Typography variant="h6">Role</Typography>
+            <Grid container direction="row" alignItems="center" spacing={1}>
+                <Grid item>
+                  <WorkIcon />
+                </Grid>
+                <Grid item>
+                  <Typography variant="h5">Role</Typography>
+                </Grid>
+              </Grid>
               <TextField
                 variant="filled"
                 fullWidth={true}
@@ -56,7 +73,7 @@ export default function SearchJob(props) {
           </Card>
         </Box>
 
-        <SalaryInput classes={classes}/>
+        <SalaryInput classes={classes} />
       </Box>
     </Box>
   );

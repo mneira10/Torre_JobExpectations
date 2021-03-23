@@ -19,11 +19,20 @@ const themeDark = createMuiTheme({
     },
     primary: {
       main: "#00e9b1",
+      // contrastText: "#fff"
     },
     secondary: {
       main: "#b593ff",
     },
+    action: {
+      disabledBackground: '#007d60',
+      disabled: '#000',
+    },
   },
+  toggle: {
+    thumbOnColor: 'yellow',
+    trackOnColor: 'red'
+  }
 });
 function App() {
   const [location, setLocation] = useState(null);
