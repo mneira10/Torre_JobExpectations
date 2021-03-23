@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { HorizontalBar } from "react-chartjs-2";
 import { getMostWantedSkills } from "../ClientLibraries/Torre";
 import { inputCardStyles } from "../InputCards/InputCardConstants";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 export default function SkillResultCard(props) {
   const [skillData, setSkillData] = useState(null);
@@ -63,33 +64,37 @@ export default function SkillResultCard(props) {
   return (
     <div>
       {skillData === null ? (
-        <h1>Loading...</h1>
+        <Card className={classes.inputFieldCard}>
+          <Box m={2} display="flex" flexDirection='column' alignItems='center' justifyContent="center">
+            <Typography variant="h5">Loading...</Typography>
+            <CircularProgress/>
+          </Box>
+        </Card>
       ) : (
-        <Card className={classes.inputFieldCard} >
+        <Card className={classes.inputFieldCard}>
+          <Box m={2} display="flex" justifyContent="center">
+            <Typography variant="h5">
+              Total jobs found: {skillData.total}
+            </Typography>
+          </Box>
 
-            <Box m={2} display='flex' justifyContent='center' >
-                <Typography variant='h5'>
-                    Total jobs found: {skillData.total}
-                </Typography>
-            </Box>
-
-            <Box m={2} style={{ minHeight: 700 }}>
-                <HorizontalBar
-                  data={{
-                    labels: skillData.labels,
-                    datasets: [
-                      {
-                        label: "# of Jobs",
-                        data: skillData.data,
-                        backgroundColor: "rgba(0, 233, 177, 0.8)",
-                        borderColor: "rgba(0, 233, 177, 0.8)",
-                        borderWidth: 1,
-                      },
-                    ],
-                  }}
-                  options={options}
-                />
-            </Box>
+          <Box m={2} style={{ minHeight: 700 }}>
+            <HorizontalBar
+              data={{
+                labels: skillData.labels,
+                datasets: [
+                  {
+                    label: "# of Jobs",
+                    data: skillData.data,
+                    backgroundColor: "rgba(0, 233, 177, 0.8)",
+                    borderColor: "rgba(0, 233, 177, 0.8)",
+                    borderWidth: 1,
+                  },
+                ],
+              }}
+              options={options}
+            />
+          </Box>
         </Card>
       )}
     </div>
