@@ -56,7 +56,7 @@ function App() {
   return (
     <MuiThemeProvider theme={themeDark}>
       <CssBaseline />
-      <Box m={5}>{renderContent()}</Box>
+      <Box m={5} display='flex' justifyContent='center'>{renderContent()}</Box>
     </MuiThemeProvider>
   );
 }
