@@ -1,0 +1,1 @@
+export const maxSalaryInYears = 500000.0;

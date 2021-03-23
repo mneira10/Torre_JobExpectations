@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import SearchJob from "./SearchJob/SearchJob";
 import { MuiThemeProvider, CssBaseline, Box } from "@material-ui/core";
 import { themeDark } from "./Theme";
+import { maxSalaryInYears } from "./Constants";
 
 function App() {
   const [location, setLocation] = useState("");
   const [role, setRole] = useState("");
   const [salaryRange, setSalaryRange] = useState({
-    range: null,
-    periodicity: null,
+    range: [0, maxSalaryInYears],
+    periodicity: "YEARLY",
   });
   const [userSearched, setUserSearched] = useState(false);
 

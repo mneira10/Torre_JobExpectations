@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Card,
   CardContent,
@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import Slider from "@material-ui/core/Slider";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
-
+import { maxSalaryInYears } from "../../Constants";
 export default function SalaryInputCard(props) {
   const salaryPeriods = {
     YEARLY: { text: "yearly", normFactor: 1.0, key: "YEARLY" },
@@ -18,42 +18,26 @@ export default function SalaryInputCard(props) {
     HOURLY: { text: "hourly", normFactor: 1 / (52 * 40), key: "HOURLY" },
   };
 
-  const maxSalaryInYears = 450000.0;
-
-  const [localSalaryRange, setlocalSalaryRange] = useState(
-    props.searchParamState.salaryRange.range === null
-      ? [0, maxSalaryInYears]
-      : props.searchParamState.salaryRange
-  );
-  const [localSalaryPeriod, setLocalSalaryPeriod] = useState(
-    props.searchParamState.salaryRange.periodicity === null
-      ? salaryPeriods.YEARLY.key
-      : props.searchParamState.salaryRange.periodicity
-  );
-
   // state handlers
   function handleSalaryPeriod(newSalaryPeriod) {
-    setlocalSalaryRange(
-      localSalaryRange.map(
+    props.searchParamState.setSalaryRange((prevState) => ({
+      range: prevState.range.map(
         (x) =>
-          (x / salaryPeriods[localSalaryPeriod].normFactor) *
+          (x / salaryPeriods[prevState.periodicity].normFactor) *
           salaryPeriods[newSalaryPeriod].normFactor
-      )
-    );
-    setLocalSalaryPeriod(newSalaryPeriod);
-    props.searchParamState.setSalaryRange({
-      range: localSalaryRange,
-      periodicity: salaryPeriods[newSalaryPeriod],
-    });
+      ),
+      periodicity: newSalaryPeriod,
+    }));
   }
 
   const handleRangeChange = (event, newValue) => {
-    const newRange = newValue.map((x) => sliderToSalary(x, localSalaryPeriod));
-    setlocalSalaryRange(newRange);
-    props.searchParamState.setSalaryRange({
+    const newRange = newValue.map((x) =>
+      sliderToSalary(x, props.searchParamState.salaryRange.periodicity)
+    );
+    props.searchParamState.setSalaryRange((prevState) => ({
       range: newRange,
-      periodicity: salaryPeriods[localSalaryPeriod],
-    });
+      periodicity: prevState.periodicity,
+    }));
   };
 
   // presentation format
@@ -63,7 +47,10 @@ export default function SalaryInputCard(props) {
 
   function valuetext(value) {
     return `${numberWithCommas(
-      sliderToSalary(value, localSalaryPeriod).toFixed(0)
+      sliderToSalary(
+        value,
+        props.searchParamState.salaryRange.periodicity
+      ).toFixed(0)
     )} USD`;
   }
 
@@ -82,7 +69,9 @@ export default function SalaryInputCard(props) {
       buttons.push(
         <Button
           key={salaryPeriod}
-          disabled={localSalaryPeriod === salaryPeriod}
+          disabled={
+            props.searchParamState.salaryRange.periodicity === salaryPeriod
+          }
           onClick={(event) => handleSalaryPeriod(salaryPeriod)}
         >
           {salaryPeriod}
@@ -96,7 +85,6 @@ export default function SalaryInputCard(props) {
       </ButtonGroup>
     );
   }
-
   return (
     <Card className={props.classes.textFieldCard}>
       <CardContent>
@@ -120,12 +108,17 @@ export default function SalaryInputCard(props) {
           <Box width={"80%"} m={5}>
             <Typography variant="subtitle1" align="center">
               {`${numberWithCommas(
-                localSalaryRange[0].toFixed(0)
-              )} USD - ${numberWithCommas(localSalaryRange[1].toFixed(0))} USD`}
+                props.searchParamState.salaryRange.range[0].toFixed(0)
+              )} USD - ${numberWithCommas(
+                props.searchParamState.salaryRange.range[1].toFixed(0)
+              )} USD`}
             </Typography>
             <Slider
-              value={localSalaryRange.map((x) =>
-                salaryToSlider(x, localSalaryPeriod)
+              value={props.searchParamState.salaryRange.range.map((x) =>
+                salaryToSlider(
+                  x,
+                  props.searchParamState.salaryRange.periodicity
+                )
               )}
               onChange={handleRangeChange}
               getAriaValueText={valuetext}
@@ -135,7 +128,7 @@ export default function SalaryInputCard(props) {
               ]}
             />
             <Typography variant="h6" align="center">
-              {localSalaryPeriod.toUpperCase()}
+              {props.searchParamState.salaryRange.periodicity.toUpperCase()}
             </Typography>
           </Box>
         </Box>

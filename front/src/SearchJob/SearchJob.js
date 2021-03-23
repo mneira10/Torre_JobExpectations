@@ -2,11 +2,7 @@ import React from "react";
 import {
   Typography,
   Box,
-  Card,
-  CardContent,
   makeStyles,
-  TextField,
-  Grid,
   Button,
 } from "@material-ui/core";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
