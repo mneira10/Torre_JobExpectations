@@ -16,7 +16,7 @@ import WorkIcon from "@material-ui/icons/Work";
 const useStyles = makeStyles((theme) => ({
   textFieldCard: {
     maxWidth: 400,
-    minWidth: 330,
+    minWidth: 350,
     margin: 10,
   },
 }));
@@ -60,7 +60,7 @@ export default function SearchJob(props) {
                 <TextField
                   variant="filled"
                   fullWidth={true}
-                  placeholder="Where would you like to work? eg. Remote"
+                  placeholder="eg. Remote, Bogota"
                 />
               </Box>
             </CardContent>
