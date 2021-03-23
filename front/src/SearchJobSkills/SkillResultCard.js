@@ -18,7 +18,6 @@ export default function SkillResultCard(props) {
       props.searchParamState.salaryRange.range[1],
       props.searchParamState.salaryRange.periodicity
     ).then((data) => {
-      console.log(data);
       let newSkillData = {
         labels: data.aggregators.skill.map((x) => x.value),
         data: data.aggregators.skill.map((x) => x.total),
@@ -78,7 +77,7 @@ export default function SkillResultCard(props) {
             </Typography>
           </Box>
 
-          <Box m={2} style={{ minHeight: 700 }}>
+          <Box m={2} style={{ minHeight: 620 }}>
             <HorizontalBar
               data={{
                 labels: skillData.labels,
