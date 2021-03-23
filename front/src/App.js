@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import SearchJob from "./SearchJob/SearchJob";
 import { MuiThemeProvider, CssBaseline, Box } from "@material-ui/core";
-import "./App.css";
 import { themeDark } from "./Theme";
 
 function App() {
