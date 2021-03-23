@@ -15,8 +15,8 @@ import WorkIcon from "@material-ui/icons/Work";
 
 const useStyles = makeStyles((theme) => ({
   textFieldCard: {
-    maxWidth: 345,
-    minWidth: 400,
+    maxWidth: 400,
+    minWidth: 330,
     margin: 10,
   },
 }));
@@ -26,14 +26,13 @@ export default function SearchJob(props) {
 
   return (
     <Box
-      width={"60%"}
+      width={"80%"}
         display="flex"
         flexDirection="column"
-      //   flexWrap="wrap"
         justifyContent="center"
         alignItems="center"
     >
-      <Box m={3}>
+      <Box m={1}>
         <Typography variant="h2" style={{ fontWeight: 600 }} align={"center"}>
           What skills do you need for your dream job?
         </Typography>
@@ -44,7 +43,7 @@ export default function SearchJob(props) {
         flexDirection="row"
         flexWrap="wrap"
         justifyContent="center"
-        m={4}
+        m={3}
       >
         <Box display="flex" flexDirection="column" justifyContent="center">
           <Card className={classes.textFieldCard}>
@@ -95,8 +94,7 @@ export default function SearchJob(props) {
         display="flex"
         flexDirection="column"
         justifyContent="center"
-        // alignContent="center"
-        width={"70%"}
+        width={"60%"}
       >
         <Button variant="contained" color="primary" fullWidth={true}>
           <Typography>Search</Typography>

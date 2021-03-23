@@ -2,38 +2,13 @@ import React, { useState } from "react";
 import SearchJob from "./SearchJob/SearchJob";
 import {
   MuiThemeProvider,
-  createMuiTheme,
   CssBaseline,
   Box,
 } from "@material-ui/core";
 import "./App.css";
-const themeDark = createMuiTheme({
-  palette: {
-    background: {
-      default: "#252525",
-      paper: "#424242",
-    },
-    text: {
-      primary: "#ffffff",
-      secondary: "#aaaaaa",
-    },
-    primary: {
-      main: "#00e9b1",
-      // contrastText: "#fff"
-    },
-    secondary: {
-      main: "#b593ff",
-    },
-    action: {
-      disabledBackground: '#007d60',
-      disabled: '#000',
-    },
-  },
-  toggle: {
-    thumbOnColor: 'yellow',
-    trackOnColor: 'red'
-  }
-});
+import { themeDark } from "./Theme";
+
+
 function App() {
   const [location, setLocation] = useState(null);
   const [role, setRole] = useState(null);
@@ -56,7 +31,9 @@ function App() {
   return (
     <MuiThemeProvider theme={themeDark}>
       <CssBaseline />
-      <Box m={5} display='flex' justifyContent='center'>{renderContent()}</Box>
+      <Box m={5} display="flex" justifyContent="center">
+        {renderContent()}
+      </Box>
     </MuiThemeProvider>
   );
 }
