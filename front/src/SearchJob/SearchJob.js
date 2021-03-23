@@ -24,13 +24,15 @@ const useStyles = makeStyles((theme) => ({
 export default function SearchJob(props) {
   const classes = useStyles();
 
+  console.log(props);
+
   return (
     <Box
       width={"80%"}
-        display="flex"
-        flexDirection="column"
-        justifyContent="center"
-        alignItems="center"
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      alignItems="center"
     >
       <Box m={1}>
         <Typography variant="h2" style={{ fontWeight: 600 }} align={"center"}>
@@ -61,6 +63,9 @@ export default function SearchJob(props) {
                   variant="filled"
                   fullWidth={true}
                   placeholder="eg. Remote, Bogota"
+                  onChange={(e) =>
+                    props.searchParamState.setLocation(e.target.value)
+                  }
                 />
               </Box>
             </CardContent>
@@ -81,13 +86,19 @@ export default function SearchJob(props) {
                   variant="filled"
                   fullWidth={true}
                   placeholder="eg. Software developer"
+                  onChange={(e) =>
+                    props.searchParamState.setRole(e.target.value)
+                  }
                 />
               </Box>
             </CardContent>
           </Card>
         </Box>
 
-        <SalaryInput classes={classes} />
+        <SalaryInput
+          classes={classes}
+          searchParamState={props.searchParamState}
+        />
       </Box>
 
       <Box
@@ -96,7 +107,12 @@ export default function SearchJob(props) {
         justifyContent="center"
         width={"60%"}
       >
-        <Button variant="contained" color="primary" fullWidth={true}>
+        <Button
+          variant="contained"
+          color="primary"
+          fullWidth={true}
+          onClick={props.searchJobs}
+        >
           <Typography>Search</Typography>
         </Button>
       </Box>
