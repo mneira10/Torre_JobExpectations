@@ -10,8 +10,9 @@ import {
   Button,
 } from "@material-ui/core";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
-import SalaryInput from "./InputCards/SalaryInput";
+import SalaryInputCard from "./InputCards/SalaryInput";
 import WorkIcon from "@material-ui/icons/Work";
+import TextFieldInputCard from "./InputCards/TextFieldInputCard";
 
 const useStyles = makeStyles((theme) => ({
   textFieldCard: {
@@ -23,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SearchJob(props) {
   const classes = useStyles();
-
 
   return (
     <Box
@@ -47,56 +47,28 @@ export default function SearchJob(props) {
         m={3}
       >
         <Box display="flex" flexDirection="column" justifyContent="center">
-          <Card className={classes.textFieldCard}>
-            <CardContent>
-              <Grid container direction="row" alignItems="center" spacing={1}>
-                <Grid item>
-                  <LocationOnIcon />
-                </Grid>
-                <Grid item>
-                  <Typography variant="h5">Location</Typography>
-                </Grid>
-              </Grid>
-              <Box m={2}>
-                <TextField
-                  variant="filled"
-                  fullWidth={true}
-                  placeholder="eg. Remote, Bogota"
-                  value={props.searchParamState.location}
-                  onChange={(e) =>
-                    props.searchParamState.setLocation(e.target.value)
-                  }
-                />
-              </Box>
-            </CardContent>
-          </Card>
+          <TextFieldInputCard
+            classes={classes}
+            cardName={"Location"}
+            placeholder={"eg. Remote, Bogota"}
+            value={props.searchParamState.location}
+            onChange={props.searchParamState.setLocation}
+          >
+            <LocationOnIcon />
+          </TextFieldInputCard>
 
-          <Card className={classes.textFieldCard}>
-            <CardContent>
-              <Grid container direction="row" alignItems="center" spacing={1}>
-                <Grid item>
-                  <WorkIcon />
-                </Grid>
-                <Grid item>
-                  <Typography variant="h5">Role</Typography>
-                </Grid>
-              </Grid>
-              <Box m={2}>
-                <TextField
-                  variant="filled"
-                  fullWidth={true}
-                  placeholder="eg. Software developer"
-                  value={props.searchParamState.role}
-                  onChange={(e) =>
-                    props.searchParamState.setRole(e.target.value)
-                  }
-                />
-              </Box>
-            </CardContent>
-          </Card>
+          <TextFieldInputCard
+            classes={classes}
+            cardName={"Role"}
+            placeholder={"eg. Software developer"}
+            value={props.searchParamState.role}
+            onChange={props.searchParamState.setRole}
+          >
+            <WorkIcon />
+          </TextFieldInputCard>
         </Box>
 
-        <SalaryInput
+        <SalaryInputCard
           classes={classes}
           searchParamState={props.searchParamState}
         />

@@ -11,7 +11,7 @@ import {
 import Slider from "@material-ui/core/Slider";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 
-export default function SalaryInput(props) {
+export default function SalaryInputCard(props) {
   const salaryPeriods = {
     YEARLY: { text: "yearly", normFactor: 1.0, key: "YEARLY" },
     MONTHLY: { text: "monthly", normFactor: 1 / 12, key: "MONTHLY" },
