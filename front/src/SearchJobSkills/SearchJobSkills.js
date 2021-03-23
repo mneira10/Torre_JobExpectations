@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SearchJob(props) {
+export default function SearchJobSkills(props) {
   const classes = useStyles();
 
   return (

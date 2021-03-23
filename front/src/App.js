@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SearchJob from "./SearchJob/SearchJob";
+import SearchJobSkills from "./SearchJobSkills/SearchJobSkills";
 import { MuiThemeProvider, CssBaseline, Box } from "@material-ui/core";
 import { themeDark } from "./Theme";
 import { maxSalaryInYears } from "./Constants";
@@ -22,7 +22,7 @@ function App() {
   function renderContent() {
     if (!userSearched) {
       return (
-        <SearchJob
+        <SearchJobSkills
           searchParamState={{
             setLocation,
             location,
