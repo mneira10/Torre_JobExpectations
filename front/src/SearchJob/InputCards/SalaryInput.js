@@ -4,7 +4,6 @@ import {
   CardContent,
   Typography,
   Grid,
-  makeStyles,
   ButtonGroup,
   Button,
   Box,
@@ -15,20 +14,24 @@ import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 export default function SalaryInput(props) {
   const salaryPeriods = {
     YEARLY: { text: "yearly", normFactor: 1.0, key: "YEARLY" },
-    MONTHLY: { text: "monthly", normFactor: 1 / 12, key: "MONTLY" },
+    MONTHLY: { text: "monthly", normFactor: 1 / 12, key: "MONTHLY" },
     HOURLY: { text: "hourly", normFactor: 1 / (52 * 40), key: "HOURLY" },
   };
 
   const maxSalaryInYears = 450000.0;
 
-  const [localSalaryRange, setlocalSalaryRange] = useState([
-    0,
-    maxSalaryInYears,
-  ]);
+  const [localSalaryRange, setlocalSalaryRange] = useState(
+    props.searchParamState.salaryRange.range === null
+      ? [0, maxSalaryInYears]
+      : props.searchParamState.salaryRange
+  );
   const [localSalaryPeriod, setLocalSalaryPeriod] = useState(
-    salaryPeriods.YEARLY.key
+    props.searchParamState.salaryRange.periodicity === null
+      ? salaryPeriods.YEARLY.key
+      : props.searchParamState.salaryRange.periodicity
   );
 
+  // state handlers
   function handleSalaryPeriod(newSalaryPeriod) {
     setlocalSalaryRange(
       localSalaryRange.map(
@@ -38,29 +41,39 @@ export default function SalaryInput(props) {
       )
     );
     setLocalSalaryPeriod(newSalaryPeriod);
+    props.searchParamState.setSalaryRange({
+      range: localSalaryRange,
+      periodicity: salaryPeriods[newSalaryPeriod],
+    });
   }
+
+  const handleRangeChange = (event, newValue) => {
+    const newRange = newValue.map((x) => sliderToSalary(x, localSalaryPeriod));
+    setlocalSalaryRange(newRange);
+    props.searchParamState.setSalaryRange({
+      range: newRange,
+      periodicity: salaryPeriods[localSalaryPeriod],
+    });
+  };
+
+  // presentation format
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'");
   }
 
+  function valuetext(value) {
+    return `${numberWithCommas(
+      sliderToSalary(value, localSalaryPeriod).toFixed(0)
+    )} USD`;
+  }
+
+  // linear transformations from slider scale to salary scale
   function sliderToSalary(x, salPeriod) {
     return (x / 100) * maxSalaryInYears * salaryPeriods[salPeriod].normFactor;
   }
 
   function salaryToSlider(x, salPeriod) {
     return (x / maxSalaryInYears / salaryPeriods[salPeriod].normFactor) * 100;
-  }
-
-  const handleRangeChange = (event, newValue) => {
-    setlocalSalaryRange(
-      newValue.map((x) => sliderToSalary(x, localSalaryPeriod))
-    );
-  };
-
-  function valuetext(value) {
-    return `${numberWithCommas(
-      sliderToSalary(value, localSalaryPeriod).toFixed(0)
-    )} USD`;
   }
 
   function renderSalaryPeriodButtons() {
@@ -83,6 +96,7 @@ export default function SalaryInput(props) {
       </ButtonGroup>
     );
   }
+
   return (
     <Card className={props.classes.textFieldCard}>
       <CardContent>

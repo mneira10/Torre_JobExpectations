@@ -16,7 +16,7 @@ import WorkIcon from "@material-ui/icons/Work";
 const useStyles = makeStyles((theme) => ({
   textFieldCard: {
     maxWidth: 400,
-    minWidth: 350,
+    minWidth: 360,
     margin: 10,
   },
 }));
@@ -24,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
 export default function SearchJob(props) {
   const classes = useStyles();
 
-  console.log(props);
 
   return (
     <Box
@@ -63,6 +62,7 @@ export default function SearchJob(props) {
                   variant="filled"
                   fullWidth={true}
                   placeholder="eg. Remote, Bogota"
+                  value={props.searchParamState.location}
                   onChange={(e) =>
                     props.searchParamState.setLocation(e.target.value)
                   }
@@ -86,6 +86,7 @@ export default function SearchJob(props) {
                   variant="filled"
                   fullWidth={true}
                   placeholder="eg. Software developer"
+                  value={props.searchParamState.role}
                   onChange={(e) =>
                     props.searchParamState.setRole(e.target.value)
                   }
