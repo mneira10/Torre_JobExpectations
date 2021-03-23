@@ -1,4 +1,4 @@
-import { Card, CardContent} from "@material-ui/core";
+import { Card, Box, Typography } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import { HorizontalBar } from "react-chartjs-2";
 import { getMostWantedSkills } from "../ClientLibraries/Torre";
@@ -21,6 +21,7 @@ export default function SkillResultCard(props) {
       let newSkillData = {
         labels: data.aggregators.skill.map((x) => x.value),
         data: data.aggregators.skill.map((x) => x.total),
+        total: data.total,
       };
 
       setSkillData(newSkillData);
@@ -42,12 +43,18 @@ export default function SkillResultCard(props) {
             beginAtZero: true,
             fontColor: "white",
           },
+          gridLines: {
+            color: "rgba(0, 0, 0, 0)",
+          },
         },
       ],
       xAxes: [
         {
           ticks: {
             fontColor: "white",
+          },
+          gridLines: {
+            color: "rgba(0, 0, 0, 0)",
           },
         },
       ],
@@ -58,23 +65,31 @@ export default function SkillResultCard(props) {
       {skillData === null ? (
         <h1>Loading...</h1>
       ) : (
-        <Card className={classes.inputFieldCard} style={{ minHeight: 600 }}>
-            <HorizontalBar
-              data={{
-                labels: skillData.labels,
-                datasets: [
-                  {
-                    label: "# of Jobs",
-                    data: skillData.data,
-                    backgroundColor: "rgba(0, 233, 177, 0.8)",
-                    borderColor: "rgba(0, 233, 177, 0.8)",
-                
-                    borderWidth: 1,
-                  },
-                ],
-              }}
-              options={options}
-            />
+        <Card className={classes.inputFieldCard} >
+
+            <Box m={2} display='flex' justifyContent='center' >
+                <Typography variant='h5'>
+                    Total jobs found: {skillData.total}
+                </Typography>
+            </Box>
+
+            <Box m={2} style={{ minHeight: 700 }}>
+                <HorizontalBar
+                  data={{
+                    labels: skillData.labels,
+                    datasets: [
+                      {
+                        label: "# of Jobs",
+                        data: skillData.data,
+                        backgroundColor: "rgba(0, 233, 177, 0.8)",
+                        borderColor: "rgba(0, 233, 177, 0.8)",
+                        borderWidth: 1,
+                      },
+                    ],
+                  }}
+                  options={options}
+                />
+            </Box>
         </Card>
       )}
     </div>

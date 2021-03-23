@@ -13,7 +13,7 @@ export default function SkillResults(props) {
         <SkillResultCard searchParamState={props.searchParamState} />
       </Box>
 
-      <Box display="flex" flexDirection="column">
+      <Box display="flex" flexDirection="column" justifyContent='space-between'>
         <TextFieldInputCard
           cardName={"Location"}
           placeholder={"eg. Remote, Bogota"}
