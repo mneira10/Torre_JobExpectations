@@ -66,35 +66,11 @@ export default function SkillResults(props) {
         </Typography>
       </Box>
 
-      <Card>
-        <CardContent>
-          <Box
-            display="flex"
-            flexDirection="column"
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Typography variant="subtitle1" align={"center"}>
-              Compare the industry required skills with your Torre Genome
-            </Typography>
-            <Box m={2}>
-              <SearchUserGenome
-                username={genomeUsername}
-                setUsername={setGenomeUsername}
-              />
-            </Box>
-            <Box m={1}>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => setCompare(true)}
-              >
-                Search
-              </Button>
-            </Box>
-          </Box>
-        </CardContent>
-      </Card>
+      <SearchUserGenome
+        username={genomeUsername}
+        setUsername={setGenomeUsername}
+        setCompare={setCompare}
+      />
 
       {renderCompareResults()}
     </Box>
