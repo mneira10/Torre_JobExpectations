@@ -38,10 +38,7 @@ export default function SearchUserGenome(props) {
             <Button
               variant="contained"
               color="primary"
-              onClick={() => {
-                props.setCompare(true);
-                props.setGenomeUsernameNotFound(false);
-              }}
+              onClick={props.onSearch}
             >
               Search
             </Button>

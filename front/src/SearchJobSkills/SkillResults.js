@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Button, Typography, Card, CardContent } from "@material-ui/core";
+import { Box, Typography } from "@material-ui/core";
 import TextFieldInputCard from "../InputCards/TextFieldInputCard";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import WorkIcon from "@material-ui/icons/Work";
@@ -7,11 +7,37 @@ import SalaryInputCard from "../InputCards/SalaryInput";
 import SkillResultCard from "./SkillResultCard";
 import SearchUserGenome from "./SearchUserGenome";
 import CompareSkills from "./CompareSkills";
+import { compareSkills } from "../ClientLibraries/CompareSkills";
 
 export default function SkillResults(props) {
   const [compare, setCompare] = useState(false);
   const [genomeUsername, setGenomeUsername] = useState("");
   const [genomeUsernameNotFound, setGenomeUsernameNotFound] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [skills, setSkills] = useState(null);
+
+  function onSearch() {
+    setCompare(true);
+    setGenomeUsernameNotFound(false);
+    setLoading(true);
+
+    compareSkills(
+      genomeUsername,
+      props.searchParamState.location,
+      props.searchParamState.role,
+      props.searchParamState.salaryRange.range[0],
+      props.searchParamState.salaryRange.range[0],
+      props.searchParamState.salaryRange.periodicity
+    ).then((data) => {
+      console.log(data);
+      if (!data.usernameFound) {
+        setGenomeUsernameNotFound(true);
+      } else {
+        setSkills(data);
+        setLoading(false);
+      }
+    });
+  }
 
   function renderCompareResults() {
     console.log("logging", !compare && genomeUsernameNotFound);
@@ -20,8 +46,10 @@ export default function SkillResults(props) {
         genomeUsername={genomeUsername}
         searchParamState={props.searchParamState}
         setGenomeUsernameNotFound={setGenomeUsernameNotFound}
+        skills={skills}
+        loading={loading}
       />
-    ): null;
+    ) : null;
   }
 
   return (
@@ -80,6 +108,7 @@ export default function SkillResults(props) {
         setCompare={setCompare}
         setGenomeUsernameNotFound={setGenomeUsernameNotFound}
         genomeUsernameNotFound={genomeUsernameNotFound}
+        onSearch={onSearch}
       />
 
       {renderCompareResults()}

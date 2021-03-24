@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { compareSkills } from "../ClientLibraries/CompareSkills";
+import React from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import {
   Card,
@@ -12,32 +11,10 @@ import {
 import { inputCardStyles } from "../InputCards/InputCardConstants";
 
 export default function CompareSkills(props) {
-  const [loading, setLoading] = useState(true);
-  const [skills, setSkills] = useState(null);
-
   const classes = inputCardStyles();
 
-  useEffect(() => {
-    compareSkills(
-      props.genomeUsername,
-      props.searchParamState.location,
-      props.searchParamState.role,
-      props.searchParamState.salaryRange.range[0],
-      props.searchParamState.salaryRange.range[0],
-      props.searchParamState.salaryRange.periodicity
-    ).then((data) => {
-      console.log(data);
-      if (!data.usernameFound) {
-        props.setGenomeUsernameNotFound(true);
-      } else {
-        setSkills(data);
-        setLoading(false);
-      }
-    });
-  }, []);
-
   function renderContent() {
-    if (loading) {
+    if (props.loading) {
       return (
         <Box>
           <Card className={classes.inputFieldCard}>
@@ -69,7 +46,7 @@ export default function CompareSkills(props) {
                 These are the skills you already have! Keep it up.
               </Typography>
               <List>
-                {skills.learned_skills.map((x) => {
+                {props.skills.learned_skills.map((x) => {
                   return (
                     <ListItem key={x.value}>
                       <Typography>{x.value}</Typography>:{" "}
@@ -90,7 +67,7 @@ export default function CompareSkills(props) {
                 job.
               </Typography>
               <List>
-                {skills.skills_to_learn.map((x) => {
+                {props.skills.skills_to_learn.map((x) => {
                   return (
                     <ListItem key={x.value}>
                       <Typography>{x.value}:</Typography>
