@@ -21,10 +21,6 @@ export default function SearchUserGenome(props) {
               label="Genome username"
               onChange={(e) => props.setUsername(e.target.value)}
             />
-            {/* <SearchUserGenome
-              username={genomeUsername}
-              setUsername={setGenomeUsername}
-            /> */}
           </Box>
           <Box m={1}>
             <Button
