@@ -1,12 +1,21 @@
-import { Box, Typography } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
+import { Box, Button, Typography, Card, CardContent } from "@material-ui/core";
 import TextFieldInputCard from "../InputCards/TextFieldInputCard";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import WorkIcon from "@material-ui/icons/Work";
 import SalaryInputCard from "../InputCards/SalaryInput";
 import SkillResultCard from "./SkillResultCard";
+import SearchUserGenome from "./SearchUserGenome";
+import CompareSkills from "./CompareSkills";
 
 export default function SkillResults(props) {
+  const [compare, setCompare] = useState(false);
+  const [genomeUsername, setGenomeUsername] = useState("");
+
+  function renderCompareResults() {
+    return !compare ? null : <CompareSkills genomeUsername={genomeUsername} />;
+  }
+
   return (
     <Box
       width={"80%"}
@@ -52,13 +61,42 @@ export default function SkillResults(props) {
       </Box>
 
       <Box m={1}>
-        <Typography variant="h3"  align={"center"}>
+        <Typography variant="h3" align={"center"}>
           See which skills you're missing
         </Typography>
-        <Typography variant="subtitle1"  align={"center"}>
-            Compare the industry required skills with your Torre Genome
-        </Typography>
       </Box>
+
+      <Card>
+        <CardContent>
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Typography variant="subtitle1" align={"center"}>
+              Compare the industry required skills with your Torre Genome
+            </Typography>
+            <Box m={2}>
+              <SearchUserGenome
+                username={genomeUsername}
+                setUsername={setGenomeUsername}
+              />
+            </Box>
+            <Box m={1}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => setCompare(true)}
+              >
+                Search
+              </Button>
+            </Box>
+          </Box>
+        </CardContent>
+      </Card>
+
+      {renderCompareResults()}
     </Box>
   );
 }

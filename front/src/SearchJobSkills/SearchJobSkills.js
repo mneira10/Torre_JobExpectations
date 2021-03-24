@@ -1,18 +1,11 @@
 import React from "react";
-import {
-  Typography,
-  Box,
-  Button,
-} from "@material-ui/core";
+import { Typography, Box, Button } from "@material-ui/core";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import SalaryInputCard from "../InputCards/SalaryInput";
 import WorkIcon from "@material-ui/icons/Work";
 import TextFieldInputCard from "../InputCards/TextFieldInputCard";
 
-
-
 export default function SearchJobSkills(props) {
-
   return (
     <Box
       width={"80%"}
@@ -54,9 +47,7 @@ export default function SearchJobSkills(props) {
           </TextFieldInputCard>
         </Box>
 
-        <SalaryInputCard
-          searchParamState={props.searchParamState}
-        />
+        <SalaryInputCard searchParamState={props.searchParamState} />
       </Box>
 
       <Box
