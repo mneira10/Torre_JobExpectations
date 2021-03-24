@@ -52,3 +52,41 @@ export function getMostWantedSkills(
       .catch((error) => reject(error));
   });
 }
+
+export function getUserAvatars(userName) {
+  const url = baseUrl + "people/_search/?size=10";
+
+  const body = {
+    name: {
+      term: userName,
+    },
+  };
+
+  console.log('fetching data for', userName);
+  return new Promise((resolve, reject) => {
+    fetch(url, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        let userAvatars = [];
+
+
+        for(const i in res.results){
+          const user = res.results[i];
+          userAvatars.push({
+            name: user.name,
+            picture: user.picture,
+            username: user.username,
+          });
+        }
+        console.log(userAvatars);
+        resolve(userAvatars);
+      })
+      .catch((error) => reject(error));
+  });
+}
