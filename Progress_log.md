@@ -37,7 +37,7 @@ This is a brief log of the activities and time spent in this project.
   - Genome skills and industry skills comparison - 2hrs
     - Own backend client library
 
-## CI/CD
+## CI/CD ~ 0.5 hrs
 
 - [Backend continuous integration](https://github.com/mneira10/Torre_JobExpectations/actions) - 30 mins (github actions)
   - Dependency installation
@@ -52,4 +52,4 @@ This is a brief log of the activities and time spent in this project.
   - Set environment variables
 
 
-## Estimated total time ~ 20hrs
+# Estimated total time ~ 20hrs
