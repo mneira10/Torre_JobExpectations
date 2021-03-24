@@ -29,7 +29,6 @@ export default function SkillResults(props) {
       props.searchParamState.salaryRange.range[0],
       props.searchParamState.salaryRange.periodicity
     ).then((data) => {
-      console.log(data);
       if (!data.usernameFound) {
         setGenomeUsernameNotFound(true);
       } else {
@@ -40,7 +39,6 @@ export default function SkillResults(props) {
   }
 
   function renderCompareResults() {
-    console.log("logging", !compare && genomeUsernameNotFound);
     return compare && !genomeUsernameNotFound ? (
       <CompareSkills
         genomeUsername={genomeUsername}

@@ -7,7 +7,6 @@ export function compareSkills(
   salaryRangePeriodicity
 ) {
   const url = process.env.REACT_APP_COMPARE_SKILLS_URL + 'skillDifferences';
-  console.log(url);
   const body = {
     genome_username: genomeUsername,
     location: location,

@@ -62,7 +62,6 @@ export function getUserAvatars(userName) {
     },
   };
 
-  console.log('fetching data for', userName);
   return new Promise((resolve, reject) => {
     fetch(url, {
       method: "post",
@@ -84,7 +83,6 @@ export function getUserAvatars(userName) {
             username: user.username,
           });
         }
-        console.log(userAvatars);
         resolve(userAvatars);
       })
       .catch((error) => reject(error));
