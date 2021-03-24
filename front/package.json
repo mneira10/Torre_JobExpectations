@@ -18,7 +18,7 @@
   },
   "engines" {
     "node":"12.18.4",
-    "npm" : "7.6.3",
+    "npm" : "7.6.3"
   },
   "scripts": {
     "start": "react-scripts start",
