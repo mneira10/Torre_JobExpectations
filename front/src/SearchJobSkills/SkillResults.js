@@ -11,9 +11,17 @@ import CompareSkills from "./CompareSkills";
 export default function SkillResults(props) {
   const [compare, setCompare] = useState(false);
   const [genomeUsername, setGenomeUsername] = useState("");
+  const [genomeUsernameNotFound, setGenomeUsernameNotFound] = useState(false);
 
   function renderCompareResults() {
-    return !compare ? null : <CompareSkills genomeUsername={genomeUsername} />;
+    console.log("logging", !compare && genomeUsernameNotFound);
+    return compare && !genomeUsernameNotFound ? (
+      <CompareSkills
+        genomeUsername={genomeUsername}
+        searchParamState={props.searchParamState}
+        setGenomeUsernameNotFound={setGenomeUsernameNotFound}
+      />
+    ): null;
   }
 
   return (
@@ -70,6 +78,8 @@ export default function SkillResults(props) {
         username={genomeUsername}
         setUsername={setGenomeUsername}
         setCompare={setCompare}
+        setGenomeUsernameNotFound={setGenomeUsernameNotFound}
+        genomeUsernameNotFound={genomeUsernameNotFound}
       />
 
       {renderCompareResults()}
